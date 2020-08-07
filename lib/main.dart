@@ -208,6 +208,7 @@ class _State extends State<MyApp> {
           child: new Column(
             children: <Widget>[
               new Text(helloWorld),
+              showAlertWidget(),
               snackBar(),
               bottomSheet(),
               new RaisedButton(
@@ -350,5 +351,30 @@ class _State extends State<MyApp> {
       children: list,
     );
     return column;
+  }
+
+  //Alert
+  Future showAlert(BuildContext context, String message) async {
+    return showDialog(
+      context: context,
+      child: new AlertDialog(
+        title: new Text(message),
+        actions: [
+          new FlatButton(
+            onPressed: ()=> Navigator.pop(context), 
+            child: new Text("OK")
+            )
+        ],
+      )
+    );
+  }
+
+  Widget showAlertWidget() {
+    return Container(
+      child: new RaisedButton(
+        onPressed: () => showAlert(context, "Do you like Flutter ?"),
+        child: new Text("Alert Button"),
+        ),
+    );
   }
 }
