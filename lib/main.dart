@@ -13,6 +13,9 @@ class MyApp extends StatefulWidget {
   _State createState() => new _State();
 }
 
+//SimpleDialog
+enum Answers { YES, NO, MAYBE }
+
 class _State extends State<MyApp> {
   String helloWorld = "Hello World!";
 
@@ -208,6 +211,7 @@ class _State extends State<MyApp> {
           child: new Column(
             children: <Widget>[
               new Text(helloWorld),
+              showSimpleDialogWidget(),
               showAlertWidget(),
               snackBar(),
               bottomSheet(),
@@ -356,17 +360,14 @@ class _State extends State<MyApp> {
   //Alert
   Future showAlert(BuildContext context, String message) async {
     return showDialog(
-      context: context,
-      child: new AlertDialog(
-        title: new Text(message),
-        actions: [
-          new FlatButton(
-            onPressed: ()=> Navigator.pop(context), 
-            child: new Text("OK")
-            )
-        ],
-      )
-    );
+        context: context,
+        child: new AlertDialog(
+          title: new Text(message),
+          actions: [
+            new FlatButton(
+                onPressed: () => Navigator.pop(context), child: new Text("OK"))
+          ],
+        ));
   }
 
   Widget showAlertWidget() {
@@ -374,7 +375,54 @@ class _State extends State<MyApp> {
       child: new RaisedButton(
         onPressed: () => showAlert(context, "Do you like Flutter ?"),
         child: new Text("Alert Button"),
-        ),
+      ),
+    );
+  }
+
+  //Simple Dialog
+  void setSimpleDialogValue(String value) {
+    setState(() {
+      helloWorld = "Simple Dialog Selected Value: $value";
+    });
+  }
+
+  Future showAnswerDialog() async {
+    switch (await showDialog(
+        context: context,
+        child: new SimpleDialog(
+            title: new Text("Do you like Flutter? "),
+            children: <Widget>[
+              new SimpleDialogOption(
+                child: new Text("YES Option"),
+                onPressed: () => (Navigator.pop(context, Answers.YES)),
+              ),
+              new SimpleDialogOption(
+                child: new Text("NO Option"),
+                onPressed: () => (Navigator.pop(context, Answers.NO)),
+              ),
+              new SimpleDialogOption(
+                child: new Text("MAY BE Option"),
+                onPressed: () => (Navigator.pop(context, Answers.MAYBE)),
+              ),
+            ]))) {
+      case Answers.YES:
+        setSimpleDialogValue("YES");
+        break;
+      case Answers.NO:
+        setSimpleDialogValue("NO");
+        break;
+      case Answers.MAYBE:
+        setSimpleDialogValue("MAY BE");
+        break;
+    }
+  }
+
+  Widget showSimpleDialogWidget() {
+    return Container(
+      child: new RaisedButton(
+        onPressed: showAnswerDialog,
+        child: new Text('Show Simple Dialog'),
+      ),
     );
   }
 }
