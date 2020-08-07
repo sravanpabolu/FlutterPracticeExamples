@@ -131,31 +131,28 @@ class _State extends State<MyApp> {
   int bottomIndex = 0;
 
   //bottom sheet
-  void showBottomSheet(){
+  void showBottomSheet() {
     showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return new Container(
-          padding: new EdgeInsets.all(15.0),
-          child: new Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              new Text(
-                "Some info here",
-                style: new TextStyle(
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold
+        context: context,
+        builder: (BuildContext context) {
+          return new Container(
+            padding: new EdgeInsets.all(15.0),
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                new Text(
+                  "Some info here",
+                  style: new TextStyle(
+                      color: Colors.red, fontWeight: FontWeight.bold),
                 ),
-              ),
-              new RaisedButton(
-                onPressed: () => Navigator.pop(context),
-                child: new Text('Close'),
-              )
-            ],
-          ),
-        );
-      }
-    );
+                new RaisedButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: new Text('Close'),
+                )
+              ],
+            ),
+          );
+        });
   }
 
   @override
@@ -204,12 +201,14 @@ class _State extends State<MyApp> {
           onPressed: () => btnFooterClick("Button 3"),
         ),
       ],
+      key: snackBarKeyState,
       body: new Container(
         padding: new EdgeInsets.all(32),
         child: new Center(
           child: new Column(
             children: <Widget>[
               new Text(helloWorld),
+              snackBar(),
               bottomSheet(),
               new RaisedButton(
                 onPressed: selectDate,
@@ -296,12 +295,28 @@ class _State extends State<MyApp> {
     );
   }
 
+  //Snack Bar
+  final GlobalKey<ScaffoldState> snackBarKeyState =
+      new GlobalKey<ScaffoldState>();
+  void showSnackBar() {
+    snackBarKeyState.currentState
+        .showSnackBar(new SnackBar(content: new Text("Hello Snack Bar")));
+  }
+
+  Widget snackBar() {
+    return Container(
+        child: new RaisedButton(
+      onPressed: showSnackBar,
+      child: new Text("Show Snack Bar"),
+    ));
+  }
+
   Widget bottomSheet() {
     return Container(
       child: new RaisedButton(
         onPressed: showBottomSheet,
         child: new Text("Bottom Sheet"),
-        ),
+      ),
     );
   }
 
