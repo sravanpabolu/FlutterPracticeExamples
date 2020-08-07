@@ -130,6 +130,34 @@ class _State extends State<MyApp> {
   List<BottomNavigationBarItem> bottomBarItems;
   int bottomIndex = 0;
 
+  //bottom sheet
+  void showBottomSheet(){
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return new Container(
+          padding: new EdgeInsets.all(15.0),
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              new Text(
+                "Some info here",
+                style: new TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+              new RaisedButton(
+                onPressed: () => Navigator.pop(context),
+                child: new Text('Close'),
+              )
+            ],
+          ),
+        );
+      }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -182,6 +210,7 @@ class _State extends State<MyApp> {
           child: new Column(
             children: <Widget>[
               new Text(helloWorld),
+              bottomSheet(),
               new RaisedButton(
                 onPressed: selectDate,
                 child: new Text("Date"),
@@ -240,7 +269,6 @@ class _State extends State<MyApp> {
           ),
         ),
       ),
-
       bottomNavigationBar: new BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -265,6 +293,15 @@ class _State extends State<MyApp> {
           });
         },
       ),
+    );
+  }
+
+  Widget bottomSheet() {
+    return Container(
+      child: new RaisedButton(
+        onPressed: showBottomSheet,
+        child: new Text("Bottom Sheet"),
+        ),
     );
   }
 
