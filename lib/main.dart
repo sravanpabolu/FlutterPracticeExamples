@@ -25,6 +25,7 @@ class _State extends State<MyApp> {
           child: new Column(
             children: <Widget>[
               new Text("Login Form"),
+              cardWidget(),
               new Row(
                 children: [
                   new Text("Username"),
@@ -56,6 +57,34 @@ class _State extends State<MyApp> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget cardWidget() {
+    return new Container(
+      child: new Column(children: [
+        new Card(
+                child: new Container(
+                  padding: new EdgeInsets.all(30),
+                  child: new Column(
+                      children: [new Text("Card 1"), new Text("Card 2")]),
+                ),
+              ),
+              new Card(
+                child: new Container(
+                  padding: new EdgeInsets.all(30),
+                  child: new Column(
+                      children: [new Text("Card 1"), new Text("Card 2")]),
+                ),
+              ),
+              new Card(
+                child: new Container(
+                  padding: new EdgeInsets.all(30),
+                  child: new Column(
+                      children: [new Text("Card 1"), new Text("Card 2")]),
+                ),
+              ),
+      ],)
     );
   }
 }
