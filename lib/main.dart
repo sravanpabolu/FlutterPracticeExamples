@@ -80,34 +80,66 @@ class _State extends State<MyApp> {
 
   double sliderValue = 0.0;
   void setSliderValue(double value) => setState(() {
-    helloWorld = "Slider value is $value";
-    sliderValue = value;
-  });
+        helloWorld = "Slider value is $value";
+        sliderValue = value;
+      });
 
   //Date Picker
   String dateValue = '';
 
   Future selectDate() async {
     DateTime pickedDate = await showDatePicker(
-      context: context, 
-      initialDate: new DateTime.now(), 
-      firstDate: new DateTime(1987), 
-      lastDate: new DateTime(2087)
-      );
-      if( pickedDate != null) {
-        setState(() {
-          dateValue = pickedDate.toString();
-          helloWorld = "Selected Date: $dateValue";
-        });
-      }
+        context: context,
+        initialDate: new DateTime.now(),
+        firstDate: new DateTime(1987),
+        lastDate: new DateTime(2087));
+    if (pickedDate != null) {
+      setState(() {
+        dateValue = pickedDate.toString();
+        helloWorld = "Selected Date: $dateValue";
+      });
+    }
+  }
+
+  //Appbar
+  int appBarValue = 0;
+  void addAppBarValue() => setState(() {
+        appBarValue++;
+        helloWorld = "Appbar value: $appBarValue";
+      });
+  void removeAppBarValue() => setState(() {
+        appBarValue--;
+        helloWorld = "Appbar value: $appBarValue";
+      });
+
+  //Floating Action button
+  String floatingActionValue = '';
+  void btnFloatingActionClicked() {
+    setState(() {
+      floatingActionValue = new DateTime.now().toString();
+      helloWorld = "Floating Time: $floatingActionValue";
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text("Home")),
-      resizeToAvoidBottomInset: false,
-      resizeToAvoidBottomPadding: false,
+      appBar: new AppBar(
+        title: new Text("Home"),
+        // backgroundColor: Colors.orange,
+        // actions: <Widget>[
+        //   new IconButton(icon: new Icon(Icons.add), onPressed: addAppBarValue),
+        //   new IconButton(
+        //       icon: new Icon(Icons.remove), onPressed: removeAppBarValue
+        //       ),
+        // ],
+      ),
+      floatingActionButton: new FloatingActionButton(
+        onPressed: btnFloatingActionClicked,
+        backgroundColor: Colors.red,
+        mini: false,
+        child: new Icon(Icons.timer),
+      ),
       body: new Container(
         padding: new EdgeInsets.all(32),
         child: new Center(
@@ -117,7 +149,7 @@ class _State extends State<MyApp> {
               new RaisedButton(
                 onPressed: selectDate,
                 child: new Text("Date"),
-                ),
+              ),
               new Slider(value: sliderValue, onChanged: setSliderValue),
               new Switch(value: switchValue1, onChanged: switchValue1Changed),
               new SwitchListTile(
