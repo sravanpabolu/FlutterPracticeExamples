@@ -123,7 +123,12 @@ class _State extends State<MyApp> {
 
   //Footer
   String footerValue = '';
-  void btnFooterClick(String value) => setState(() => helloWorld = "Footer Value: $value");
+  void btnFooterClick(String value) =>
+      setState(() => helloWorld = "Footer Value: $value");
+
+  //Bottom navigation bar
+  List<BottomNavigationBarItem> bottomBarItems;
+  int bottomIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -234,6 +239,31 @@ class _State extends State<MyApp> {
             ],
           ),
         ),
+      ),
+
+      bottomNavigationBar: new BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            title: Text('Business'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            title: Text('School'),
+          ),
+        ],
+        fixedColor: Colors.blue,
+        currentIndex: bottomIndex,
+        onTap: (int item) {
+          setState(() {
+            bottomIndex = item;
+            helloWorld = "Current selected index is: ${bottomIndex.toString()}";
+          });
+        },
       ),
     );
   }
