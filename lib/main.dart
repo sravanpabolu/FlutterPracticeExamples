@@ -121,7 +121,9 @@ class _State extends State<MyApp> {
     });
   }
 
-  //Drawer
+  //Footer
+  String footerValue = '';
+  void btnFooterClick(String value) => setState(() => helloWorld = "Footer Value: $value");
 
   @override
   Widget build(BuildContext context) {
@@ -136,24 +138,39 @@ class _State extends State<MyApp> {
         ],
       ),
       drawer: new Drawer(
-          child: new Container(
-        padding: new EdgeInsets.all(32),
-        child: new Column(
-          children: <Widget>[
-            new Text("Menu"),
-            new RaisedButton(
-              child: new Text("Click me"),
-              onPressed: () => Navigator.pop(context),
-            )
-          ],
+        child: new Container(
+          padding: new EdgeInsets.all(32),
+          child: new Column(
+            children: <Widget>[
+              new Text("Menu"),
+              new RaisedButton(
+                child: new Text("Click me"),
+                onPressed: () => Navigator.pop(context),
+              )
+            ],
+          ),
         ),
-      )),
+      ),
       floatingActionButton: new FloatingActionButton(
         onPressed: btnFloatingActionClicked,
         backgroundColor: Colors.red,
         mini: false,
         child: new Icon(Icons.timer),
       ),
+      persistentFooterButtons: [
+        new IconButton(
+          icon: new Icon(Icons.timer),
+          onPressed: () => btnFooterClick("Button 1"),
+        ),
+        new IconButton(
+          icon: new Icon(Icons.pageview),
+          onPressed: () => btnFooterClick("Button 2"),
+        ),
+        new IconButton(
+          icon: new Icon(Icons.ac_unit),
+          onPressed: () => btnFooterClick("Button 3"),
+        ),
+      ],
       body: new Container(
         padding: new EdgeInsets.all(32),
         child: new Center(
