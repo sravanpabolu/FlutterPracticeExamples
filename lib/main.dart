@@ -121,19 +121,33 @@ class _State extends State<MyApp> {
     });
   }
 
+  //Drawer
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Home"),
-        // backgroundColor: Colors.orange,
-        // actions: <Widget>[
-        //   new IconButton(icon: new Icon(Icons.add), onPressed: addAppBarValue),
-        //   new IconButton(
-        //       icon: new Icon(Icons.remove), onPressed: removeAppBarValue
-        //       ),
-        // ],
+        backgroundColor: Colors.orange,
+        actions: <Widget>[
+          new IconButton(icon: new Icon(Icons.add), onPressed: addAppBarValue),
+          new IconButton(
+              icon: new Icon(Icons.remove), onPressed: removeAppBarValue),
+        ],
       ),
+      drawer: new Drawer(
+          child: new Container(
+        padding: new EdgeInsets.all(32),
+        child: new Column(
+          children: <Widget>[
+            new Text("Menu"),
+            new RaisedButton(
+              child: new Text("Click me"),
+              onPressed: () => Navigator.pop(context),
+            )
+          ],
+        ),
+      )),
       floatingActionButton: new FloatingActionButton(
         onPressed: btnFloatingActionClicked,
         backgroundColor: Colors.red,
