@@ -1,6 +1,6 @@
 # FlutterPracticeExamples
 
-A new Flutter project.
+This project is a sample project created for practicing flutter.
 
 ## Getting Started
 
