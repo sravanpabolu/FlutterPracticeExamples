@@ -161,7 +161,6 @@ class _State extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      resizeToAvoidBottomPadding: false,
       appBar: new AppBar(
         title: new Text("Home"),
         backgroundColor: Colors.orange,
